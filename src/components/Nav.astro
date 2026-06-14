@@ -1,0 +1,74 @@
+---
+import { KULTUEROEFFNER_URL } from "../lib/site";
+
+const links = [
+  { href: "/#was", label: "Was ist das?" },
+  { href: "/#termin", label: "Nächster Termin" },
+  { href: "/ideen", label: "Ideen & Pitches" },
+  { href: "/protokolle", label: "Protokolle" },
+  { href: KULTUEROEFFNER_URL, label: "KulTürÖffner", extern: true },
+];
+---
+
+<header
+  class="sticky top-0 z-50 backdrop-blur-md bg-base-100/80 border-b border-base-200"
+>
+  <div class="navbar mx-auto max-w-6xl px-3">
+    <div class="navbar-start">
+      <a href="/" class="btn btn-ghost px-2 gap-2 group">
+        <span
+          class="inline-flex h-9 w-9 items-center justify-center rounded-blob bg-primary/30 text-lg group-hover:rotate-6 transition-transform"
+          aria-hidden="true">🌱</span
+        >
+        <span class="font-display font-medium text-lg leading-tight normal-case">
+          Zukunfts&shy;werkstatt
+        </span>
+      </a>
+    </div>
+
+    <nav class="navbar-end">
+      <ul class="hidden md:flex menu menu-horizontal gap-1 font-semibold">
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                target={l.extern ? "_blank" : undefined}
+                rel={l.extern ? "noopener noreferrer" : undefined}
+                class="rounded-full"
+              >
+                {l.label}
+                {l.extern && <span aria-hidden="true">↗</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="dropdown dropdown-end md:hidden">
+        <div tabindex="0" role="button" class="btn btn-sm btn-soft btn-primary">
+          Menü
+        </div>
+        <ul
+          tabindex="0"
+          class="dropdown-content menu mt-2 w-56 rounded-box bg-base-100 shadow-lg border border-base-200 font-semibold z-10"
+        >
+          {
+            links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  target={l.extern ? "_blank" : undefined}
+                  rel={l.extern ? "noopener noreferrer" : undefined}
+                >
+                  {l.label}
+                  {l.extern && <span aria-hidden="true">↗</span>}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

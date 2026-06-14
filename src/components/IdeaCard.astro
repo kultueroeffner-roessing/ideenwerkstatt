@@ -1,0 +1,33 @@
+---
+import StatusBadge from "./StatusBadge.astro";
+
+interface Props {
+  titel: string;
+  pitch: string;
+  status: string;
+  kategorie: string;
+  emoji: string;
+  eingebrachtVon?: string;
+}
+const { titel, pitch, status, kategorie, emoji, eingebrachtVon } = Astro.props;
+---
+
+<article
+  class="card bg-base-100 border border-base-200 shadow-sm hover:-translate-y-1 transition-transform group"
+>
+  <div class="card-body gap-3">
+    <div class="flex items-start justify-between gap-3">
+      <span
+        class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15 text-2xl group-hover:rotate-6 transition-transform"
+        aria-hidden="true">{emoji}</span
+      >
+      <StatusBadge status={status} />
+    </div>
+    <h3 class="card-title font-display leading-snug">{titel}</h3>
+    <p class="text-base-content/70 text-sm leading-relaxed flex-1">{pitch}</p>
+    <div class="flex items-center gap-2 text-xs text-base-content/60 pt-1">
+      <span class="badge badge-sm badge-ghost font-semibold">{kategorie}</span>
+      {eingebrachtVon && <span>· von {eingebrachtVon}</span>}
+    </div>
+  </div>
+</article>

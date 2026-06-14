@@ -1,0 +1,56 @@
+---
+interface Props {
+  href: string;
+  titel: string;
+  datum: Date;
+  ort: string;
+  zusammenfassung: string;
+  themen: string[];
+  entwurf?: boolean;
+}
+const { href, titel, datum, ort, zusammenfassung, themen, entwurf } =
+  Astro.props;
+const datumStr = datum.toLocaleDateString("de-DE", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<a
+  href={href}
+  class="card bg-base-100 border border-base-200 shadow-sm hover:-translate-y-1 transition-transform group"
+>
+  <div class="card-body">
+    <div class="flex items-center gap-2 text-sm font-semibold text-accent">
+      <span aria-hidden="true">📅</span>
+      <time datetime={datum.toISOString()}>{datumStr}</time>
+      {entwurf && <span class="badge badge-soft badge-warning badge-sm">Entwurf</span>}
+    </div>
+    <h3
+      class="card-title font-display leading-snug group-hover:text-primary transition-colors"
+    >
+      {titel}
+    </h3>
+    <p class="text-xs text-base-content/60">{ort}</p>
+    <p class="text-base-content/70 text-sm leading-relaxed mt-1">
+      {zusammenfassung}
+    </p>
+    {
+      themen.length > 0 && (
+        <ul class="flex flex-wrap gap-2 mt-2">
+          {themen.slice(0, 4).map((t) => (
+            <li class="badge badge-soft badge-success badge-sm font-semibold">
+              {t}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <span
+      class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-3 group-hover:gap-2 transition-all"
+    >
+      Nachlese lesen <span aria-hidden="true">→</span>
+    </span>
+  </div>
+</a>

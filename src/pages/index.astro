@@ -1,0 +1,282 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import IdeaCard from "../components/IdeaCard.astro";
+import ProtokollCard from "../components/ProtokollCard.astro";
+import { KULTUEROEFFNER_URL, termin } from "../lib/site";
+
+// Teaser-Inhalte aus den Collections laden
+const alleIdeen = await getCollection("ideen");
+const ideen = [...alleIdeen]
+  .sort((a, b) => (b.data.datum?.getTime() ?? 0) - (a.data.datum?.getTime() ?? 0))
+  .slice(0, 3);
+
+const protokolle = (await getCollection("protokolle"))
+  .sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime())
+  .slice(0, 2);
+
+const ideenGesamt = alleIdeen.length;
+
+const wozu = [
+  {
+    emoji: "🗣️",
+    titel: "Zuhören & Mitreden",
+    text: "Bei Kaffee und Kuchen erzählen, was uns am Herzen liegt – ganz ohne Tagesordnungszwang.",
+  },
+  {
+    emoji: "🌻",
+    titel: "Ideen säen",
+    text: "Jede Idee ist willkommen. Wir sammeln, sortieren und schauen gemeinsam, was Rössing guttut.",
+  },
+  {
+    emoji: "🤝",
+    titel: "Gemeinsam machen",
+    text: "Aus guten Ideen werden kleine Projekte – mit Menschen, die Lust haben, anzupacken.",
+  },
+];
+---
+
+<Base>
+  <!-- ============================ HERO ============================ -->
+  <section class="relative overflow-hidden">
+    <!-- dekorative Pastell-Blobs -->
+    <div
+      class="pointer-events-none absolute -top-24 -right-20 h-80 w-80 bg-accent/15 rounded-blob animate-floaty"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute top-40 -left-24 h-72 w-72 bg-secondary/15 rounded-blob animate-floaty"
+      style="animation-delay: -2.5s"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -bottom-16 right-1/3 h-64 w-64 bg-info/15 rounded-blob animate-floaty"
+      style="animation-delay: -4s"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 pt-16 pb-20 md:pt-24 md:pb-28">
+      <span class="badge badge-soft badge-success badge-lg gap-2 font-bold">
+        🌱 Die offene Ideenwerkstatt der KulTürÖffner Rössing
+      </span>
+      <h1
+        class="mt-6 font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl"
+      >
+        Wir denken unser
+        <span class="text-primary">Dorf</span> gemeinsam
+        <span class="text-accent">weiter</span>.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-base-content/70 max-w-2xl leading-relaxed">
+        Die Zukunftswerkstatt ist unser gemütlicher Treffpunkt zum Träumen,
+        Schnacken und Anpacken. Komm vorbei, bring deine Ideen mit – und mach
+        Rössing ein Stückchen lebendiger.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/#termin" class="btn btn-primary btn-lg rounded-full shadow-md">
+          📅 Nächster Termin: 21. Juni
+        </a>
+        <a href="/ideen" class="btn btn-lg rounded-full">
+          💡 Ideen ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= WAS IST DAS? ======================= -->
+  <section id="was" class="mx-auto max-w-6xl px-5 py-16 scroll-mt-24">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="font-display text-3xl md:text-4xl">
+          Was ist die Zukunftswerkstatt?
+        </h2>
+        <p class="mt-5 text-base-content/70 leading-relaxed">
+          Die Zukunfts- oder Ideenwerkstatt ist ein offenes Treffen für alle, die
+          in Rössing leben. Ein paar Mal im Jahr setzen wir uns zusammen – mal als
+          Themenwanderung durchs Dorf, mal als gemütlicher „Dorfschnack" im
+          Dorfgemeinschaftshaus.
+        </p>
+        <p class="mt-4 text-base-content/70 leading-relaxed">
+          Es gibt keine feste Tagesordnung von oben:
+          <strong>Die Themen bestimmt ihr</strong> – alle, die da sind. Wir hören
+          einander zu, sammeln Ideen und überlegen, was wir gemeinsam auf die
+          Beine stellen können.
+        </p>
+      </div>
+      <div class="grid gap-4">
+        {
+          wozu.map((w) => (
+            <div class="card card-side bg-base-100 border border-base-200 shadow-sm">
+              <div class="card-body flex-row gap-4 items-start">
+                <span class="text-3xl" aria-hidden="true">
+                  {w.emoji}
+                </span>
+                <div>
+                  <h3 class="font-display text-lg">{w.titel}</h3>
+                  <p class="text-sm text-base-content/70 leading-relaxed mt-1">
+                    {w.text}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WER MACHT DAS? ======================= -->
+  <section class="mx-auto max-w-6xl px-5 py-12">
+    <div
+      class="card bg-secondary/15 border border-secondary/20"
+    >
+      <div class="card-body md:flex-row gap-8 items-center p-8 md:p-12">
+        <span
+          class="inline-flex h-24 w-24 shrink-0 items-center justify-center rounded-blob bg-base-100 text-5xl shadow-md mx-auto"
+          aria-hidden="true">🔑</span
+        >
+        <div>
+          <h2 class="font-display text-2xl md:text-3xl">
+            Wer steckt dahinter? Die KulTürÖffner
+          </h2>
+          <p class="mt-4 text-base-content/70 leading-relaxed">
+            Die KulTürÖffner sind eine Gruppe Rössinger:innen, die Kultur,
+            Begegnung und neue Ideen ins Dorf holen. Der Name ist Programm: Wir
+            wollen <strong>Türen öffnen</strong> – für Kultur, fürs Miteinander
+            und für alle, die mitgestalten möchten.
+          </p>
+          <a
+            href={KULTUEROEFFNER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary btn-sm rounded-full mt-5"
+          >
+            Mehr über die KulTürÖffner ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== NÄCHSTER TERMIN ===================== -->
+  <section id="termin" class="mx-auto max-w-6xl px-5 py-16 scroll-mt-24">
+    <div class="card bg-neutral text-neutral-content shadow-lg overflow-hidden">
+      <div class="card-body p-8 md:p-12 grid md:grid-cols-2 gap-10">
+        <div>
+          <span class="badge badge-soft badge-success gap-2 font-bold">
+            ✨ Nächste Werkstatt
+          </span>
+          <h2 class="mt-5 font-display text-3xl md:text-4xl">
+            {termin.titel}
+          </h2>
+          <p class="mt-4 text-neutral-content/80 leading-relaxed">
+            Wir wandern durchs Dorf, kommen ins Gespräch und lassen den
+            Nachmittag bei Kaffee und Kuchen ausklingen. Egal ob du eine Idee
+            mitbringst oder einfach neugierig bist – komm vorbei!
+          </p>
+          <p class="mt-4 text-sm text-neutral-content/70">
+            Mögliche Themen: Teilnahme an der Grünen Woche in Berlin, bessere
+            Dorf­kommunikation, mehr Miteinander und junge Leute einbinden.
+          </p>
+        </div>
+
+        <div class="rounded-box bg-base-100/10 p-6 md:p-7 space-y-4">
+          <div class="flex gap-3">
+            <span class="text-2xl" aria-hidden="true">📅</span>
+            <div>
+              <p class="font-display text-lg">{termin.datum}</p>
+              <p class="text-neutral-content/70 text-sm">{termin.zeit}</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <span class="text-2xl" aria-hidden="true">📍</span>
+            <p class="text-neutral-content/80 text-sm leading-relaxed">
+              {termin.ort}
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <span class="text-2xl" aria-hidden="true">📝</span>
+            <p class="text-neutral-content/80 text-sm leading-relaxed">
+              Anmeldung bis {termin.anmeldungBis} bei Rüdiger Busse – gern mit
+              Kuchenspende! 🍰
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a
+              href="tel:+4917622795460"
+              class="btn btn-sm rounded-full bg-base-100 text-base-content border-none"
+            >
+              📞 0176 22795460
+            </a>
+            <a
+              href="mailto:ruediger-b@gmx.de?subject=Anmeldung%20Zukunftswerkstatt%2021.%20Juni"
+              class="btn btn-sm btn-accent rounded-full"
+            >
+              ✉️ Anmelden
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= IDEEN-TEASER ======================= -->
+  <section class="mx-auto max-w-6xl px-5 py-12">
+    <div class="flex items-end justify-between gap-4 flex-wrap mb-8">
+      <div>
+        <h2 class="font-display text-3xl md:text-4xl">Ideen & Pitches</h2>
+        <p class="mt-2 text-base-content/70 max-w-xl">
+          Unser öffentliches Ideenbuch: Hier sammeln wir Vorschläge aus den
+          Werkstätten und verfolgen, was daraus wird.
+        </p>
+      </div>
+      <a href="/ideen" class="btn rounded-full whitespace-nowrap">
+        Alle {ideenGesamt} Ideen →
+      </a>
+    </div>
+    {
+      ideen.length > 0 ? (
+        <div class="grid gap-5 md:grid-cols-3">
+          {ideen.map((i) => (
+            <IdeaCard {...i.data} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-base-content/70">
+          Bald geht's los – die ersten Ideen folgen.
+        </p>
+      )
+    }
+  </section>
+
+  <!-- ===================== PROTOKOLL-TEASER ===================== -->
+  <section class="mx-auto max-w-6xl px-5 py-12">
+    <div class="flex items-end justify-between gap-4 flex-wrap mb-8">
+      <div>
+        <h2 class="font-display text-3xl md:text-4xl">
+          Nachlese der letzten Werkstätten
+        </h2>
+        <p class="mt-2 text-base-content/70 max-w-xl">
+          Was wurde besprochen? Hier findest du die Protokolle – locker
+          aufbereitet zum Nachlesen.
+        </p>
+      </div>
+      <a href="/protokolle" class="btn rounded-full whitespace-nowrap">
+        Alle Protokolle →
+      </a>
+    </div>
+    {
+      protokolle.length > 0 ? (
+        <div class="grid gap-5 md:grid-cols-2">
+          {protokolle.map((p) => (
+            <ProtokollCard href={`/protokolle/${p.id}`} {...p.data} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-base-content/70">Die erste Nachlese folgt bald.</p>
+      )
+    }
+  </section>
+</Base>

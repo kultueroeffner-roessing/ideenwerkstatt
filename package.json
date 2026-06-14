@@ -1,0 +1,31 @@
+{
+  "name": "ideenwerkstatt",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "wrangler dev",
+    "deploy": "astro build && wrangler deploy",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.9.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@fontsource-variable/fraunces": "^5.2.5",
+    "@fontsource-variable/nunito": "^5.2.5",
+    "@fontsource/fredoka": "^5.2.5",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.1.8",
+    "daisyui": "^5.5.23",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.19.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

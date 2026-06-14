@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
+
+/* ------------------------------------------------------------------ *
+ *  DaisyUI-Theme „kultueroeffner" – weiche, verspielte Pastell-Optik
+ * ------------------------------------------------------------------ */
+@plugin "daisyui/theme" {
+  name: "kultueroeffner";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #fbf6ee; /* cremiges Papier */
+  --color-base-200: #f3ebdd;
+  --color-base-300: #e8ddca;
+  --color-base-content: #443a4b; /* weiches Pflaumen-Dunkel */
+
+  --color-primary: #7fb073; /* Salbeigrün */
+  --color-primary-content: #ffffff;
+  --color-secondary: #a888d6; /* Lavendel */
+  --color-secondary-content: #ffffff;
+  --color-accent: #f29a6b; /* Pfirsich */
+  --color-accent-content: #443a4b;
+  --color-neutral: #443a4b;
+  --color-neutral-content: #fbf6ee;
+
+  --color-info: #6db1d6; /* Himmelblau */
+  --color-info-content: #ffffff;
+  --color-success: #7fb073;
+  --color-success-content: #ffffff;
+  --color-warning: #f0c64a; /* Butter */
+  --color-warning-content: #4a3c0c;
+  --color-error: #e88a8a;
+  --color-error-content: #ffffff;
+
+  /* betont rund & weich */
+  --radius-selector: 1rem;
+  --radius-field: 2rem;
+  --radius-box: 1.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.28rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Theme-Tokens für Tailwind-Utilities (Schriften, Deko-Pastelltöne,
+ *  Schwebe-Animation). Reine Tailwind-v4-Konfiguration – kein eigenes CSS.
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-display: "Fredoka", "Nunito Variable", system-ui, sans-serif;
+  --font-body: "Nunito Variable", system-ui, sans-serif;
+
+  /* organische „Blob"-Rundung (erzeugt die Utility `rounded-blob`) */
+  --radius-blob: 42% 58% 63% 37% / 41% 44% 56% 59%;
+
+  /* zarte Pastell-Flächen für Hintergründe & Deko-Blobs */
+  --color-sage-50: #eef5ec;
+  --color-sage-100: #dcebd7;
+  --color-peach-100: #fde4d4;
+  --color-lavender-100: #ece3f7;
+  --color-sky-100: #dcecf6;
+  --color-butter-100: #fcf1cf;
+
+  /* sanftes Schweben für Deko-Elemente */
+  --animate-floaty: floaty 7s ease-in-out infinite;
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+}

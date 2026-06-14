@@ -1,0 +1,53 @@
+---
+import { KULTUEROEFFNER_URL, kontakt } from "../lib/site";
+const year = 2026;
+---
+
+<footer class="mt-24 bg-neutral text-neutral-content">
+  <div
+    class="footer sm:footer-horizontal mx-auto max-w-6xl px-5 py-14 gap-10"
+  >
+    <aside class="max-w-sm">
+      <p class="font-display text-xl mb-2">KulTürÖffner Rössing</p>
+      <p class="text-neutral-content/80 text-sm leading-relaxed">
+        Wir öffnen Türen für Kultur, Begegnung und neue Ideen in Rössing.
+        Die Zukunftswerkstatt ist unser offener Ort zum Mitdenken und Mitmachen.
+      </p>
+      <a
+        href={KULTUEROEFFNER_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link link-hover text-sm font-semibold mt-3"
+      >
+        kultüröffner.rössing.de ↗
+      </a>
+    </aside>
+
+    <nav>
+      <h6 class="footer-title opacity-90">Schnellzugriff</h6>
+      <a class="link link-hover" href="/#was">Was ist die Werkstatt?</a>
+      <a class="link link-hover" href="/#termin">Nächster Termin</a>
+      <a class="link link-hover" href="/ideen">Ideen & Pitches</a>
+      <a class="link link-hover" href="/protokolle">Protokolle</a>
+    </nav>
+
+    <nav>
+      <h6 class="footer-title opacity-90">Mitmachen</h6>
+      <p class="text-sm text-neutral-content/80 leading-relaxed max-w-xs">
+        Lust dabei zu sein? Komm vorbei oder melde dich bei {kontakt.name}:
+      </p>
+      <a class="link link-hover font-semibold" href={kontakt.telefonHref}
+        >{kontakt.telefon}</a
+      >
+      <a class="link link-hover font-semibold" href={`mailto:${kontakt.email}`}
+        >{kontakt.email}</a
+      >
+    </nav>
+  </div>
+
+  <div
+    class="border-t border-neutral-content/15 text-neutral-content/60 text-xs py-5 px-5 text-center"
+  >
+    © {year} KulTürÖffner Rössing · Zukunftswerkstatt · Ein offenes Projekt aus dem Dorf
+  </div>
+</footer>

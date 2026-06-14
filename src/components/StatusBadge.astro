@@ -1,0 +1,13 @@
+---
+import { meta } from "../lib/status";
+interface Props {
+  status: string;
+}
+const { status } = Astro.props;
+const m = meta(status);
+---
+
+<span class:list={["badge", m.badge, "font-bold gap-1"]}>
+  <span aria-hidden="true">{m.emoji}</span>
+  {m.label}
+</span>
