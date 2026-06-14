@@ -76,7 +76,7 @@ const gruppen = ideaStatus
           </h2>
           <div class="grid gap-5 md:grid-cols-3">
             {g.ideen.map((i) => (
-              <IdeaCard {...i.data} />
+              <IdeaCard {...i.data} href={`/ideen/${i.id}`} />
             ))}
           </div>
         </section>
