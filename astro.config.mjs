@@ -6,6 +6,8 @@ import tailwindcss from "@tailwindcss/vite";
 // siehe wrangler.jsonc. Kein SSR-Adapter nötig, alles wird zur Build-Zeit gerendert.
 export default defineConfig({
   site: "https://zukunftswerkstatt.xn--kultrffner-icb4e.xn--rssing-wxa.de",
+  // Astro 7 entfernt sonst Leerraum zwischen Inline-Elementen ("Wort<a>Link</a>" klebt zusammen).
+  compressHTML: true,
   vite: {
     // Cast wegen Versions-Mismatch der Vite-Typen
     // (Astro-internes Vite vs. das von @tailwindcss/vite) – nur ein Typproblem.

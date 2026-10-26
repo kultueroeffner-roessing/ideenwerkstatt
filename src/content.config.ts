@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 // Status-Werte für Ideen/Pitches – so lässt sich die Umsetzung öffentlich tracken.
