@@ -67,6 +67,14 @@
         "dockerfile"
       ],
       "pinDigests": true
+    },
+    {
+      "description": "Astro und alle @astrojs/*-Pakete immer gemeinsam aktualisieren – einzeln passen ihre Peer-Abhängigkeiten nicht zusammen.",
+      "matchPackageNames": [
+        "astro",
+        "@astrojs/**"
+      ],
+      "groupName": "astro"
     }
   ],
   "vulnerabilityAlerts": {
